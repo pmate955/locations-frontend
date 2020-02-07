@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+import { AuthenticationService } from './authentication.service';
 
 
 @Component({
@@ -10,4 +11,8 @@ import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 export class AppComponent {
   faCoffee = faCoffee;
   title = 'locations-frontend';
+
+  constructor(private authService: AuthenticationService) {}
+  
+
 }
