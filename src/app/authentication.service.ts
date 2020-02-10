@@ -27,12 +27,13 @@ export class AuthenticationService {
   }
 
   login(user) {
-    if (user.email !== '' && user.password !== '' ) {
-      return this.server.request('POST', '/login', {
-        email: user.email,
+    if (user.username !== '' && user.password !== '' ) {
+      return this.server.request('POST', '/sessions/new', {
+        username: user.username,
         password: user.password
       }).subscribe((response: any) => {
-        if (response.auth === true && response.token !== undefined) {
+        console.log(response)
+        if (response.token !== undefined) {
           this.token = response.token;
           this.server.setLoggedIn(true, this.token);
           this.loggedIn.next(true);

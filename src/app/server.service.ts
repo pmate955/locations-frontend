@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-const baseUrl = 'locations-api:3000';
+const baseUrl = 'http://localhost:3010/api';
 
 @Injectable({
   providedIn: 'root'
