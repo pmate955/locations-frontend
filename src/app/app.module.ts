@@ -11,6 +11,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MapComponent } from './map/map.component';
 import { AuthenticationService } from './authentication.service';
 import { ServerService } from './server.service';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { ServerService } from './server.service';
     AppComponent,
     AppHeaderComponent,
     LoginComponent,
-    MapComponent
+    MapComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,

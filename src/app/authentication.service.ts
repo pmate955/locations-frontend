@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { ServerService } from './server.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthenticationService {
+  @Output() getLoggedInName = new EventEmitter<string>();
+
   private loggedIn = new BehaviorSubject<boolean>(false);
   private token: string;
 
@@ -23,6 +23,7 @@ export class AuthenticationService {
       this.token = user.token;
       this.server.setLoggedIn(true, this.token);
       this.loggedIn.next(true);
+      this.getLoggedInName.emit('FAAAAA')
     }
   }
 
@@ -41,6 +42,8 @@ export class AuthenticationService {
             token: this.token,
           };
           localStorage.setItem('user', JSON.stringify(userData));
+          this.getLoggedInName.emit('FERI')
+          console.log('EMIITTTED')
           this.router.navigateByUrl('/map');
         }
       });
@@ -50,9 +53,9 @@ export class AuthenticationService {
   logout() {
     this.server.setLoggedIn(false);
     delete this.token;
-
     this.loggedIn.next(false);
     localStorage.clear();
+    this.getLoggedInName.emit('')
     this.router.navigate(['/']);
   }
 }
