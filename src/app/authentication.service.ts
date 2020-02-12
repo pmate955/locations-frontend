@@ -23,7 +23,8 @@ export class AuthenticationService {
       this.token = user.token;
       this.server.setLoggedIn(true, this.token);
       this.loggedIn.next(true);
-      this.getLoggedInName.emit('FAAAAA')
+      console.log(user.username)
+      this.getLoggedInName.emit(user.username)
     }
   }
 
@@ -40,10 +41,13 @@ export class AuthenticationService {
           this.loggedIn.next(true);
           const userData = {
             token: this.token,
+            id: response.id,
+            username: response.username,
+            email: response.email,
+            role: response.role
           };
           localStorage.setItem('user', JSON.stringify(userData));
-          this.getLoggedInName.emit('FERI')
-          console.log('EMIITTTED')
+          this.getLoggedInName.emit(userData.username)
           this.router.navigateByUrl('/map');
         }
       });

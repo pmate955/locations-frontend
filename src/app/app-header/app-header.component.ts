@@ -23,7 +23,6 @@ export class AppHeaderComponent implements OnInit {
   ngOnInit() {
     console.log('INIT', this.authService.getLoggedInName)
     this.subscription = this.authService.getLoggedInName.subscribe((name) => {
-      console.log('OOOOOKKK', name)
       if(name != '') {
         this.loggedIn = true;
         this.userName = name;

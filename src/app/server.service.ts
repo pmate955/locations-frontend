@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-const baseUrl = 'http://localhost:3010/api';
+import  {API_URL as baseUrl } from '../config/config';
 
 @Injectable({
   providedIn: 'root'
