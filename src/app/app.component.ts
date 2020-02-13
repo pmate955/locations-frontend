@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
-import { AuthenticationService } from './authentication.service';
+import { AuthenticationService } from './services/auth.service';
+import { User } from './models/user';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -11,8 +13,12 @@ import { AuthenticationService } from './authentication.service';
 export class AppComponent {
   faCoffee = faCoffee;
   title = 'locations-frontend';
-
-  constructor(private authService: AuthenticationService) {}
+  currentUser: User;
+  
+  constructor( private router: Router,
+    private authenticationService: AuthenticationService) {
+      this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+    }
   
 
 }

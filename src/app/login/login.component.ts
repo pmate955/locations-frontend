@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AuthenticationService } from '../authentication.service';
+import { AuthenticationService } from '../services/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -9,30 +11,40 @@ import { AuthenticationService } from '../authentication.service';
 })
 export class LoginComponent implements OnInit {
   form: FormGroup;
-  public loginInvalid: boolean;
-  private formSubmitAttempt: boolean;
+  loading = false;
+  submitted = false;
+  returnUrl: string;
+  error = '';
 
-  constructor(private fb: FormBuilder, private authService: AuthenticationService) { }
+  constructor(private fb: FormBuilder,   
+              private route: ActivatedRoute,
+              private router: Router,
+              private authService: AuthenticationService
+) {
+  if (this.authService.currentUserValue) { 
+  this.router.navigate(['/']);
+              }
+}
 
   ngOnInit() {
     this.form = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   async onSubmit() {
-    this.loginInvalid = false;
-    this.formSubmitAttempt = false;
-    if (this.form.valid) {
-      try {
-        await this.authService.login(this.form.value);      
-      } catch (err) {
-        this.loginInvalid = true;
-      }
-    } else {
-      this.formSubmitAttempt = true;
-    }
+    this.authService.login(this.form.value.username, this.form.value.password)
+    .pipe(first())
+    .subscribe(
+        data => {
+            this.router.navigate([this.returnUrl]);
+        },
+        error => {
+            this.error = error;
+            this.loading = false;
+        });
   }
 
 }

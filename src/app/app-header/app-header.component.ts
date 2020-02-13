@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../authentication.service';
+import { AuthenticationService } from '../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +13,15 @@ export class AppHeaderComponent implements OnInit {
 
   constructor(private authService: AuthenticationService) {
     this.userName = '';
-    this.loggedIn = false;
+    this.authService.currentUser.subscribe(newUser => {
+      if(newUser){
+        this.userName = newUser.username;
+      }
+      this.loggedIn = this.userName !== '';
+    })
+    if(this.authService.currentUserValue){
+      this.userName = authService.currentUserValue.username;
+    }
   }
 
   onLogout() {
@@ -21,15 +29,7 @@ export class AppHeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('INIT', this.authService.getLoggedInName)
-    this.subscription = this.authService.getLoggedInName.subscribe((name) => {
-      if(name != '') {
-        this.loggedIn = true;
-        this.userName = name;
-      } else {
-        this.loggedIn = false;
-      }
-    });
+    
   }
 
   ngOnDestroy() {
