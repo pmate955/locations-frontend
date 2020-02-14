@@ -11,6 +11,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MapComponent } from './map/map.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
+import { RegistrationComponent } from './registration/registration.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { JwtInterceptor } from './helpers/jwt.interceptor';
     AppHeaderComponent,
     LoginComponent,
     MapComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
