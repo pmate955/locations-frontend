@@ -3,6 +3,7 @@ import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { AuthenticationService } from './services/auth.service';
 import { User } from './models/user';
 import { Router } from '@angular/router';
+import { ApiCommunicationService } from './shared/api-communication-service';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class AppComponent {
   currentUser: User;
   
   constructor( private router: Router,
-    private authenticationService: AuthenticationService) {
+    private authenticationService: AuthenticationService, private apiCommunicationService: ApiCommunicationService) {
       this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
     }
   

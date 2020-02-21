@@ -1,0 +1,23 @@
+import { Observable } from 'rxjs';
+import { User } from '../../models/user';
+import { AbstractApiConnector } from '../api-connectors/AbstractApiConnector';
+
+export class MapApiConnector extends AbstractApiConnector {
+  protected readonly apiRoute: string = `${this.apiBaseUrl}`;
+
+  public getUsers() {
+   return this.http.get<User[]>(`${this.apiRoute}/users`);
+  }
+
+  public getOneUserById(id: string): Observable<User> {
+    return this.http.get<User>(`${this.apiRoute}/users/` + id);
+  }
+
+  public deleteUserById(id: string) {
+    return this.http.delete(`${this.apiRoute}/users/` + id);
+  }
+
+  public updateUserById(id: string) {
+    return this.http.put(`${this.apiRoute}/users/` + id, {verifiedByAdmin: true} );
+  }
+}

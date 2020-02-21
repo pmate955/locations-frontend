@@ -12,6 +12,7 @@ import { MapComponent } from './map/map.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { RegistrationComponent } from './registration/registration.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { RegistrationComponent } from './registration/registration.component';
     LoginComponent,
     MapComponent,
     WelcomeComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

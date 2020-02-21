@@ -5,12 +5,14 @@ import {MapComponent} from './map/map.component'
 import { WelcomeComponent } from './welcome/welcome.component';
 import { AuthGuard } from './helpers/auth.guard';
 import { RegistrationComponent } from './registration/registration.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 const routes: Routes = [
   {path: '', component: WelcomeComponent},  
   {path: 'login', component: LoginComponent},
   {path: 'map', component: MapComponent, canActivate: [AuthGuard]},
+  {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
   {path: 'register', component: RegistrationComponent}, 
   {path: '**', redirectTo: 'login' }
 ];
