@@ -10,7 +10,7 @@ export enum Connector {
   USER = '[User]'
 }
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class ApiCommunicationService {
   private readonly apiBaseUrl: string;
   private connectors: Map<Connector, AbstractApiConnector>;
